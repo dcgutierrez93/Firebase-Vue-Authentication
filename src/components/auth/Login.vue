@@ -31,7 +31,6 @@ import Firebase from 'firebase'
 export default {
     methods: {
         signIn() {
-            
         },
         signOut() {
 
