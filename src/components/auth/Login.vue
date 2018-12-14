@@ -17,8 +17,8 @@
                     class="form-control"
                     placeholder="Enter password...">
             </div>
-            <button class="btn btn-primary" type="button">Sign in</button>
-            <button class="btn btn-danger" type="button">Sign out</button>
+            <button class="btn btn-primary" type="button" @click.prevent="signIn">Sign in</button>
+            <button class="btn btn-danger" type="button" @click.prevent="signOut">Sign out</button>
         </form>
     </div>
 
@@ -26,7 +26,17 @@
 </template>
 
 <script>
+import Firebase from 'firebase'
+
 export default {
+    methods: {
+        signIn() {
+            
+        },
+        signOut() {
+
+        }
+    }
 }
 </script>
 
