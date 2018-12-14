@@ -56,6 +56,7 @@
 <script>
 // import Firebase from 'firebase'
 // TODO: Install Axios
+import axios from 'axios'
 
 export default {
     data() {
@@ -75,6 +76,14 @@ export default {
                 confirmPassword: this.confirmPassword
             }
             console.log(formData)
+            axios.post('https://fir-authentication-96400.firebaseio.com/user.json', {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+                confirmPassword: formData.confirmPassword
+            })
+                .then(res => console.log(res))
+                .catch(error => console.log(error))
         }
     }
 }
