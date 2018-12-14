@@ -9,24 +9,25 @@
                 </div>
                 <div class="card" id="login-card">
                     <div class="card-body">
-                        <form class="">
+                        <form @submit.prevent="onSubmit">
                             <div class="form-group">
                                 <label>Email Address</label>
                                 <input
                                     type="email"
                                     id="email"
                                     class="form-control"
-                                    placeholder="Enter email...">
+                                    placeholder="Enter email..."
+                                    v-model="email">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
                                 <input
                                     type="password"
                                     id="password"
-                                    class="form-control">
+                                    class="form-control"
+                                    v-model="password">
                             </div>
-                            <button class="btn btn-primary" type="button" @click.prevent="signIn">Sign in</button>
-                            <button class="btn btn-danger" type="button" @click.prevent="signOut">Sign out</button>
+                            <button class="btn btn-primary" type="submit">Sign in</button>
                         </form>
                     </div>
                 </div>
@@ -40,11 +41,19 @@
 import Firebase from 'firebase'
 
 export default {
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
     methods: {
-        signIn() {
-        },
-        signOut() {
-
+        onSubmit() {
+            const formData = {
+                email: this.email,
+                password: this.password
+            }
+            console.log(formData)
         }
     }
 }
