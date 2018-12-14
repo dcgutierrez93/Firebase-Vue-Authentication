@@ -55,6 +55,7 @@
 
 <script>
 // import Firebase from 'firebase'
+// TODO: Install Axios
 
 export default {
     data() {
