@@ -1,12 +1,13 @@
 <style lang="css">
-
+.navbar {
+    padding: 10px 100px;
+}
 </style>
 
 <template lang="html">
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-        <div class="container">
             <a class="navbar-brand" href="#">Navbar w/ text</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,7 +29,6 @@
                     <router-link to="/register">Register</router-link>
                 </span>
             </div>
-        </div>
     </nav>
 </header>
 
