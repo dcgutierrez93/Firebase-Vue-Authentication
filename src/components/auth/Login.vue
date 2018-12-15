@@ -1,4 +1,4 @@
-<template lang="html">
+<template lang="html" id="login-page">
 
     <div class="container">
         <div class="wrapper">
@@ -59,9 +59,12 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 #login-card {
     width: 600px;
+}
+body {
+    background-color: #f2f2f2;
 }
 .wrapper {
     position: absolute;
