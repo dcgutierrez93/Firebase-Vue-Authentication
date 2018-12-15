@@ -1,11 +1,34 @@
+<style lang="css">
+
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background-color: #f2f2f2;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+</style>
+
 <template lang="html">
-    <h1>Only authorized users should see this page</h1>
+
+<div>
+    <div class="sidenav">
+
+    </div>
+    <div class="main">
+
+    </div>
+</div>
+
 </template>
 
 <script>
-export default {
-}
-</script>
 
-<style lang="css">
-</style>
+export default {}
+
+</script>

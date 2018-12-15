@@ -20,7 +20,10 @@ let router = new Router({
         {
             path: '/secure',
             name: 'secure',
-            component: Secure
+            component: Secure,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/login',
