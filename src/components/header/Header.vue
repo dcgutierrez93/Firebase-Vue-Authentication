@@ -15,14 +15,29 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
+            <!-- <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
                 </li>
+            </ul> -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" v-if="auth">
+                    <router-link class="nav-link" to="/secure">Dashboard</router-link>
+                </li>
+                <li class="nav-item" v-if="!auth">
+                    <router-link class="nav-link" to="/Login">Login</router-link>
+                </li>
+                <li class="nav-item" v-if="!auth">
+                    <router-link class="nav-link" to="/Register">Register</router-link>
+                </li>
+                <!-- <li class="nav-item" v-if="auth">
+                    <button @click="onLogout" class="logout">Logout</button>
+                </li> -->
             </ul>
             <span class="navbar-text">
-                <router-link class="mr-3" to="/login">Login</router-link>
-                <router-link to="/register">Register</router-link>
+                <!-- <router-link class="mr-3" to="/login">Login</router-link>
+                <router-link to="/register">Register</router-link> -->
+                <button @click="onLogout" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
             </span>
         </div>
     </nav>
@@ -32,6 +47,17 @@
 
 <script>
 
-export default {}
+export default {
+    computed: {
+        auth() {
+            return this.$store.getters.isAuthenticated
+        }
+    },
+    methods: {
+        onLogout() {
+            this.$store.dispatch('logout')
+        }
+    }
+}
 
 </script>
