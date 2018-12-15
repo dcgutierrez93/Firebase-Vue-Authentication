@@ -1,8 +1,5 @@
 <style lang="css">
 
-.navbar {
-    padding: 10px 100px;
-}
 
 </style>
 
@@ -21,6 +18,9 @@
                 </li>
             </ul> -->
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item" v-if="!auth">
+                    <router-link class="nav-link" to="/welcome">Welcome</router-link>
+                </li>
                 <li class="nav-item" v-if="auth">
                     <router-link class="nav-link" to="/secure">Dashboard</router-link>
                 </li>
@@ -30,9 +30,6 @@
                 <li class="nav-item" v-if="!auth">
                     <router-link class="nav-link" to="/Register">Register</router-link>
                 </li>
-                <!-- <li class="nav-item" v-if="auth">
-                    <button @click="onLogout" class="logout">Logout</button>
-                </li> -->
             </ul>
             <span class="navbar-text">
                 <!-- <router-link class="mr-3" to="/login">Login</router-link>
