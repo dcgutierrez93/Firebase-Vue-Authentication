@@ -10,13 +10,15 @@
                 <div class="card" id="register-card">
                     <div class="card-body">
                         <form @submit.prevent="onSubmit">
-                            <div class="form-group">
+                            <div class="form-group" :class="{invalid: $v.name.$error}">
                                 <label>First Name</label>
                                 <input
                                     type="text"
                                     id="text"
                                     class="form-control"
+                                    @blue="$v.name.$touch()"
                                     v-model="name">
+                                    <p class="text-danger" v-if="!$v.name.required">This field must not be empty.</p>
                             </div>
                             <div class="form-group" :class="{invalid: $v.email.$error}">
                                 <label>Email Address</label>
@@ -73,7 +75,8 @@ export default {
     },
     validations: {
         name: {
-
+            required,
+            minLen: minLength(3)
         },
         email: {
             required,
