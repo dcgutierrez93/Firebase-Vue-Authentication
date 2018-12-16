@@ -18,29 +18,34 @@
                                     class="form-control"
                                     v-model="name">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" :class="{invalid: $v.email.$error}">
                                 <label>Email Address</label>
                                 <input
                                     type="email"
                                     id="email"
                                     class="form-control"
                                     placeholder="e.g. david@boss.com"
+                                    @blur="$v.email.$touch()"
                                     v-model="email">
+                                    <p class="text-danger" v-if="!$v.email.email">Please provide a valid email address.</p>
+                                    <p class="text-danger" v-if="!$v.email.required">This field must not be empty.</p>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" :class="{invalid: $v.password.$error}">
                                 <label>Password</label>
                                 <input
                                     type="password"
                                     id="password"
                                     class="form-control"
-                                    v-model="password">
+                                    @blur="$v.password.$touch()"
+                                    v-model.trim="password">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" :class="{invalid: $v.confirmPassword.$error}">
                                 <label>Confirm Password</label>
                                 <input
                                     type="password"
                                     id="confirmPassword"
                                     class="form-control"
+                                    @blur="$v.confirmPassword.$touch()"
                                     v-model="confirmPassword">
                             </div>
                             <button class="btn btn-primary" type="submit">Register</button>
@@ -54,9 +59,8 @@
 </template>
 
 <script>
-// import Firebase from 'firebase'
-// TODO: Install Axios
 import axios from 'axios'
+import { required, email, numeric, minValue, minLength, sameAs, requiredUnless } from 'vuelidate/lib/validators'
 
 export default {
     data() {
@@ -65,6 +69,32 @@ export default {
             email: '',
             password: '',
             confirmPassword: ''
+        }
+    },
+    validations: {
+        name: {
+
+        },
+        email: {
+            required,
+            email,
+            unique: val => {
+                if (val === '') return true
+                return axios.get('/users.json?orderBy="email"&equalTo="' + val + '"')
+            .then(res => {
+              return Object.keys(res.data).length === 0
+            })
+            }
+        },
+        password: {
+            required,
+            minLen: minLength(6)
+        },
+        confirmPassword: {
+//          sameAs: sameAs('password')
+            sameAs: sameAs(vm => {
+                return vm.password
+            })
         }
     },
     methods: {
@@ -76,14 +106,6 @@ export default {
                 confirmPassword: this.confirmPassword
             }
             console.log(formData)
-            // axios.post('https://fir-authentication-96400.firebaseio.com/user.json', {
-            //     name: formData.name,
-            //     email: formData.email,
-            //     password: formData.password,
-            //     confirmPassword: formData.confirmPassword
-            // })
-            //     .then(res => console.log(res))
-            //     .catch(error => console.log(error))
             this.$store.dispatch('signup', formData)
         }
     }
@@ -91,7 +113,9 @@ export default {
 </script>
 
 <style scoped lang="css">
-
+.text-danger {
+    font-size: 12px;
+}
 #register-card {
     width: 600px;
 }

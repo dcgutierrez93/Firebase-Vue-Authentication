@@ -34,7 +34,7 @@
             <span class="navbar-text">
                 <!-- <router-link class="mr-3" to="/login">Login</router-link>
                 <router-link to="/register">Register</router-link> -->
-                <button @click="onLogout" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+                <button v-if="auth" @click="onLogout" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
             </span>
         </div>
     </nav>
